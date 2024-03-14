@@ -2,21 +2,23 @@
 import { useState } from "react";
 
 
-export default function NewItem() {
+export default function NewItem({ onAddItem }) {
     const [name, setName] = useState("");
     const [quantity, setQuantity] = useState(1);
     const [category, setCategory] = useState("Produce");
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        alert(`Added item: ${name}, quantity: ${quantity}, category: ${category}`);
 
-        const item = {
+        const id = Math.random().toString(36).substr(2, 9);
+
+        const newItem = {
+            id,
             name,
             quantity,
             category,
         };
-        console.log(item);
+        onAddItem(newItem);
 
 
         setName("");
