@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Item from "./item";
 
-export default function ItemList({items}) {
+export default function ItemList({ items, onItemSelect }) {
   const [sortBy, setSortBy] = useState("name");
 
   const handleSortChange = (sortValue) => {
@@ -26,12 +27,11 @@ export default function ItemList({items}) {
   const sortedItems = sortItems(items);
 
   return (
-    
-      <div className="bg-slate-950 p-2 m-2 max--w-sm w-full">
-        <label className=" text-gray-50 m-2" > Sort By:</label>
+    <div className="bg-slate-950 p-2 m-2 max--w-sm w-full">
+      <label className="text-gray-50 m-2">Sort By:</label>
       <button
         className={`m-2 p-1 w-28 bg-orange-500 text-gray-50 ${
-          sortBy === "name"  ? "bg-gray-700" : ""
+          sortBy === "name" ? "bg-gray-700" : ""
         }`}
         onClick={() => handleSortChange("name")}
       >
@@ -40,19 +40,20 @@ export default function ItemList({items}) {
       <button
         className={`m-2 p-1 w-28 bg-orange-500 text-gray-50 ${
           sortBy === "category" ? "bg-gray-700" : ""
-
         }`}
         onClick={() => handleSortChange("category")}
       >
         Category
       </button>
 
-
-
       {sortedItems.map((item) => (
-        <div className="p-2 m-4 bg-slate-900 max-w-sm" key={item.id}>
+        <div
+          className="p-2 m-4 bg-slate-900 max-w-sm cursor-pointer"
+          key={item.id}
+          onClick={() => onItemSelect(item)} // Add onClick handler to trigger onItemSelect function
+        >
           <p className="text-xl font-bold">{item.name}</p>
-          <p >Buy {item.quantity} in {item.category}</p>
+          <p>Buy {item.quantity} in {item.category}</p>
         </div>
       ))}
     </div>
