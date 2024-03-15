@@ -39,7 +39,7 @@ export default function NewItem({ onAddItem }) {
 
     return (
         <div>
-            <div className=" min-h-screen bg-black flex justify-center w-full  pl-40 pr-40 pt-1" >
+            <div className="" >
                 <div className=" p-2 m-4 bg-slate-900 text-black max-w-sm w-full rounded-sm h-44" >
                 <form onSubmit={handleSubmit}>
 
