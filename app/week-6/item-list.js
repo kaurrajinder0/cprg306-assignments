@@ -26,8 +26,7 @@ export default function ItemList({items}) {
   const sortedItems = sortItems(items);
 
   return (
-    <div>
-      <label className=" text-gray-50 m-2" > Sort By:</label>
+    <div className="bg-slate-950 p-2 m-2 max--w-sm w-full">
       <button
         className={`m-2 p-1 w-28 bg-orange-500 text-gray-50 ${
           sortBy === "name"  ? "bg-gray-700" : ""
