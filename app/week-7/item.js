@@ -1,10 +1,9 @@
 import React from 'react';
 
-const Item = ({item, onSelect}) => {
+const Item = ({ name, quantity, category }) => {
   return (
-    <li onClick={() => onSelect(item)}>
-    {item.name}
-    </li>
+    <div className="" >
+    </div>
   );
 };
 
