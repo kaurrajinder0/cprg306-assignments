@@ -1,30 +1,41 @@
 "use client";
+import { useState } from "react";
+import NewItem from "../week-7/new-item";
+import ItemList from "./item-list";
+import itemsdata from "./items.json";
+import MealIdeas from "./meal-ideas";
 
-import{useState} from "react";
-import ItemList from "./item-list"; 
-import NewItem from "./new-item";
-import itemsData from "./items.json";
+export default function Page() {
+  const [items, setItems] = useState(itemsdata);
 
-export default function Page(){
-  const [items, setItems] = useState(itemsData);
+  const [ingredient, setIngredient] = useState("");
 
-  const handleAddItem = (newItem) => {
-    setItems([...items, newItem]);
+  const addItem = (item) => {
+    setItems([...items, item]);
   };
+
+  const removeItem = (id) => {
+    console.log("Removing item with id:", id);
+
+    const newItemsList = [...items].filter((listItem) => listItem.id !== id);
+    setItems(newItemsList);
+  };
+
   return (
-    <div className="text-gray-50 bg-slate-950 p-2 ">
-      <h2 className="text-3xl font-bold mb-4">Shopping List</h2>
-
-      <div className="mb-4">
-        <h3 className="text-xl font-bold">Add New Item</h3>
-        <NewItem onAddItem={handleAddItem} />
+    <main className=" ">
+      <div className="flex justify-center">
+        <h1 className="text-black mr-2 font-mono text-4xl m-2 p-2 border-2 border-black rounded-full shadow-md">
+          SHOPPING LIST
+        </h1>
       </div>
 
-
-      <div>
-        <h3 className="text-xl font-bold"></h3>
-        <ItemList items={items} />
-      </div>
-    </div>
+      <NewItem onAddItem={addItem} />
+      <MealIdeas ingredient={ingredient} />
+      <ItemList
+        setIngredient={setIngredient}
+        items={items}
+        onRemoveItem={removeItem}
+      />
+    </main>
   );
 }

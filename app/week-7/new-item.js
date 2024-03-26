@@ -1,81 +1,66 @@
 "use client";
+import React from "react";
 import { useState } from "react";
-
+import Item from "./item";
 
 export default function NewItem({ onAddItem }) {
-    const [name, setName] = useState("");
-    const [quantity, setQuantity] = useState(1);
-    const [category, setCategory] = useState("Produce");
+  const [name, setName] = useState("");
+  const [quantity, setQauntity] = useState(0);
+  const [category, setCategory] = useState("produce");
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        const id = Math.random().toString(36).substr(2, 9);
-
-        const newItem = {
-            id,
-            name,
-            quantity,
-            category,
-        };
-        onAddItem(newItem);
+  function handleSubmit(event) {
+    event.preventDefault();
 
 
-        setName("");
-        setQuantity("1");
-        setCategory("produce");
+    const item = { name, quantity, category };
 
-    };
+    onAddItem(item);
 
-    const handleNameChange = (event) => {
-        setName(event.target.value);
-    };
-    const handleQuantityChange = (event) => {
-        setQuantity(parseInt(event.target.value));
-    };
-    const handleCategoryChange = (event) => {
-        setCategory(event.target.value);
-    };
+    setName("");
+    setQauntity(0);
+    setCategory("produce");
+  }
 
-    return (
-        <div>
-            <div className="" >
-                <div className=" p-2 m-4 bg-slate-900 text-black max-w-sm w-full rounded-sm h-44" >
-                <form onSubmit={handleSubmit}>
+  return (
+    <div>
+      <form
+        className=" flex flex-col justify-center align-middle p-8 max-w-xs mx-auto"
+        onSubmit={handleSubmit}
+      >
+        <label className="text-black" htmlFor="name">
+          Item
+        </label>
 
-                    <input className=" block w-full rounded-md text-black  mb-4 h-11"   type="text" placeholder="  Item name" required onChange={handleNameChange} value={name} />
-                    <div className="flex justify-between">
+        <input
+          className="mb-2"
+          type="text"
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
 
-                        <input type="number"  required min="1" max="99" onChange={handleQuantityChange} value={quantity}
-                            className="  w-20 rounded-md text-black mb-4 h-11">
-                        </input>
+        <label htmlFor="quantity">Quantity</label>
+        <input
+          className="mb-2"
+          type="text"
+          id="quantity"
+          value={quantity}
+          onChange={(e) => setQauntity(e.target.value)}
+        />
 
-                        <select required onChange={handleCategoryChange} value={category}
-                            className="  w-36 rounded-md text-black mb-4 h-11 ">
+        <label htmlFor="category">Category</label>
+        <input
+          className="mb-2"
+          type="text"
+          id="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        />
 
-                            <option value="" disabled>Category</option>
-                            <option value="produce" selected="">Produce</option>
-                            <option value="dairy">Dairy</option>
-                            <option value="bakery">Bakery</option>
-                            <option value="meat">Meat</option>
-                            <option value="frozen foods">Frozen Foods</option>
-                            <option value="canned goods">Canned Goods</option>
-                            <option value="dry goods">Dry Goods</option>
-                            <option value="beverages">Beverages</option>
-                            <option value="snacks">Snacks</option>
-                            <option value="household">Household</option>
-                            <option value="other">Other</option>
-                        </select>
-                        </div>
-
-                    <button
-                        type="submit"  
-                        className=" w-full py-2 px-4 bg-sky-600 hover:bg-sky-400 rounded-md text-white">+</button>
-
-                </form>
-                </div>
-
-            </div>
-        </div>
-    );
+        <button className="border-2 border-black bg-green-300 rounded-lg" type="submit">
+          +
+        </button>
+      </form>
+    </div>
+  );
 }
