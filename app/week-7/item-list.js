@@ -1,5 +1,5 @@
 "use client";
-import Item from "./item.js";
+import Item from "./item";
 import { useState, useEffect } from "react";
 
 export default function ItemList({
